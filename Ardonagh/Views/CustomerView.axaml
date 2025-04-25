@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:extensions="using:SukiUI.Theme"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Ardonagh.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Ardonagh.Views.CustomerView"
+             x:DataType="vm:CustomerViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:CustomerViewModel />
+    </Design.DataContext>
+
+    <StackPanel Spacing="10"
+                Width="350">
+        <TextBlock Classes="h3">
+            Customer Form
+        </TextBlock>
+        <StackPanel Orientation="Vertical"
+                    Spacing="2">
+            <TextBlock>Name:</TextBlock>
+            <TextBox Text="{Binding Name}"
+                     extensions:TextBoxExtensions.AddDeleteButton="True" />
+            <TextBlock Foreground="Red"
+                       IsVisible="{Binding !NameError}"
+                       Text="{Binding NameError}" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    Spacing="2">
+            <TextBlock>Age:</TextBlock>
+            <NumericUpDown Value="{Binding Age}"
+                           Margin="4,0"
+                           Minimum="0"
+                           Maximum="110"
+                           Increment="1"
+                           FormatString="N0"
+                           extensions:NumericUpDownExtensions.Unit="Years" />
+            <TextBlock Foreground="Red"
+                       IsVisible="{Binding !AgeError}"
+                       Text="{Binding AgeError}" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    Spacing="2">
+            <TextBlock>PostCode:</TextBlock>
+            <TextBox Text="{Binding PostCode}"
+                     extensions:TextBoxExtensions.AddDeleteButton="True" />
+            <TextBlock Foreground="Red"
+                       IsVisible="{Binding !PostCodeError}"
+                       Text="{Binding PostCodeError}" />
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    Spacing="2">
+            <TextBlock>Height:</TextBlock>
+            <NumericUpDown Value="{Binding Height}"
+                           Margin="4,0"
+                           Minimum="0"
+                           Maximum="2.50"
+                           Increment="0.1"
+                           FormatString="N2"
+                           extensions:NumericUpDownExtensions.Unit="Meters" />
+            <TextBlock Foreground="Red"
+                       IsVisible="{Binding !HeightError}"
+                       Text="{Binding HeightError}" />
+        </StackPanel>
+        <StackPanel Spacing="10"
+                    Margin="0,20,0,10"
+                    Orientation="Horizontal">
+            <Button Classes="Flat"
+                    HotKey="Enter"
+                    Command="{Binding SubmitCommand}"
+                    IsEnabled="{Binding !HasErrors}">
+                Submit
+            </Button>
+            <Button Classes="Outline"
+                    HotKey="Escape"
+                    Command="{Binding CancelCommand}">
+                Cancel
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

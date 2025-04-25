@@ -1,0 +1,105 @@
+<controls:SukiWindow xmlns="https://github.com/avaloniaui"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:vm="clr-namespace:Ardonagh.ViewModels"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:controls="using:SukiUI.Controls"
+                     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                     x:Class="Ardonagh.Views.MainWindow"
+                     x:DataType="vm:MainViewModel"
+                     Icon="/Assets/avalonia-logo.ico"
+                     BackgroundStyle="GradientDarker"
+                     BackgroundAnimationEnabled="True"
+                     BackgroundTransitionsEnabled="True"
+                     Title="Ardonagh Task">
+    <controls:SukiWindow.Hosts>
+        <controls:SukiDialogHost Manager="{Binding DialogManager}" />
+    </controls:SukiWindow.Hosts>
+    <Grid>
+        <controls:GlassCard MaxWidth="800"
+                            MaxHeight="450"
+                            Margin="10"
+                            IsAnimated="True">
+            <controls:GroupBox>
+                <controls:GroupBox.Header>
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Classes="h4">
+                                Customer Information
+                            </TextBlock>
+                            <TextBlock Classes="Caption">
+                                By - Thomas Stephens
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Spacing="5">
+                            <Button Classes="Flat"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Command="{Binding AddButtonClickedCommand}">
+                                Add
+                            </Button>
+                            <Button Classes="Flat"
+                                    VerticalAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
+                                    Command="{Binding EditButtonClickedCommand}">
+                                Edit
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </controls:GroupBox.Header>
+                <controls:GroupBox.Content>
+                    <StackPanel>
+                        <TextBlock Margin="0,10,0,0"
+                                   TextWrapping="Wrap">
+                            All the customer information is listed in the table below.
+                            You can add or edit the customer information using the buttons above.
+                            Select a customer from the table to edit their information.
+                        </TextBlock>
+                        <DataGrid Margin="0,10,0,0"
+                                  ItemsSource="{Binding Customers}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  SelectionMode="Single"
+                                  RowHeight="40"
+                                  SelectedItem="{Binding SelectedCustomer}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Name">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Age">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Age}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="PostCode">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding PostCode}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Height">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Height}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </controls:GroupBox.Content>
+            </controls:GroupBox>
+        </controls:GlassCard>
+    </Grid>
+</controls:SukiWindow>
